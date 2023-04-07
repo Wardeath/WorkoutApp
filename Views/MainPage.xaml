@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:WorkoutApp.ViewModels"
+             Shell.NavBarIsVisible="False"
+             x:Class="WorkoutApp.Views.MainPage"
+             Title="MainPage"
+             Shell.FlyoutBehavior="Disabled"
+             BackgroundColor="DeepSkyBlue"
+             MinimumHeightRequest="700">
+    
+    
+    <ContentPage.BindingContext>
+        <viewModels:MainViewModel />
+    </ContentPage.BindingContext>
+    
+    <Grid RowDefinitions="50,250,*,70">
+        <Label 
+            Text="Главная"
+            FontSize="Large"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Grid.Row="0"/>
+        <Frame HeightRequest="220"
+               BackgroundColor="CadetBlue"
+               Margin="20, 10"
+               Grid.Row="1">
+
+            <Label Text="Календарь"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+        </Frame>
+
+        <Frame HeightRequest="300"
+               BackgroundColor="DarkSlateBlue"
+               Margin="20, 10"
+               Grid.Row="2">
+
+        <Label Text="Список прошлых тренировок"
+                   TextColor="NavajoWhite"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+        </Frame>
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="3">
+
+            <ImageButton Grid.Column="0"
+                        Source="house.png"
+                        Style="{StaticResource MyImageButtonStyle}"
+                        Margin="0,5"     
+                    />
+            <ImageButton Grid.Column="1"
+                         Source="start_button.png"
+                         Style="{StaticResource MyImageButtonStyle}"
+                         Margin="0,5"
+                         Command="{Binding GoToNewCommand}"
+                        
+                    />
+            <ImageButton Grid.Column="2"
+                        Source="list.png"
+                        Margin="0,5"
+                        Style="{StaticResource MyImageButtonStyle}"
+                        Command="{Binding GoToWorkoutsCommand}"
+                    />
+
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,38 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WorkoutApp"
+             x:Class="WorkoutApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="MyImageButtonStyle"  TargetType="ImageButton">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <!-- Определяем группу состояний для ImageButton -->
+                        <VisualStateGroup x:Name="CommonStates">
+                            <!-- Определяем состояние нажатия на кнопку -->
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <!-- Настраиваем свойства изображения для состояния нажатия -->
+                                    <Setter Property="Scale" Value="1.1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <!-- Определяем состояние выхода из нажатия на кнопку -->
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <!-- Возвращаем свойства изображения к исходному состоянию -->
+                                    <Setter Property="Scale" Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

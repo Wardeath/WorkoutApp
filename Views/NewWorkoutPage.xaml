@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkoutApp.Views.NewWorkoutPage"
+             Title="Тренировка"
+             
+             xmlns:viewModels="clr-namespace:WorkoutApp.ViewModels"
+             BackgroundColor="DeepSkyBlue"
+             NavigatedTo="ContentPage_NavigatedTo">
+
+    <Grid RowDefinitions="2*,Auto,Auto" RowSpacing="10" Padding="10">
+        <CollectionView Grid.Row="0" x:Name="workoutCollection"
+                            ItemsSource="{Binding WorkoutExercises}"
+                            IsEnabled="True"
+                            >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="7"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Frame 
+                            Margin="0" Padding="5,10" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:NewWorkoutViewModel}}, Path=SelectExerciseCommand}" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*,*" ColumnSpacing="9" RowSpacing="4" >
+
+                                <StackLayout Grid.Column="1" Grid.ColumnSpan="3" Spacing="5">
+                                    <Label Text="{Binding Name}" 
+                                       HorizontalTextAlignment="Center" 
+                                       FontSize="Body" 
+                                       FontAttributes="Bold"/>
+                                    <BoxView Color="Gray"  
+                                         HeightRequest="2" 
+                                         HorizontalOptions="Fill" 
+                                         Margin="10,0,0,0" />
+                                </StackLayout>
+
+
+                                <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Вес" 
+                                       FontSize="12" 
+                                       HorizontalTextAlignment="Center"/>
+                                    <Image Source="barbell.png"
+                                       HeightRequest="30"
+                                       WidthRequest="30"
+                                />
+                                    <Label Text="{Binding WeightMid, StringFormat='{0} кг'}" 
+                                       HorizontalOptions="Center"
+                                       Margin="0" />
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Подходов"
+                                       HorizontalTextAlignment="Center"/>
+                                    <Image Source="repeat.png"
+                                       HeightRequest="30"
+                                       WidthRequest="30"
+                                />
+                                    <Label Text="{Binding Sets.Count}" HorizontalOptions="Center" Margin="0"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="3">
+                                    <Label Text="Повторений" 
+                                    HorizontalTextAlignment="Center"/>
+                                    <Image Source="barbell_hand.png"
+                                       HeightRequest="30"
+                                       WidthRequest="30"
+                                />
+                                    <Label Text="{Binding RepsMid}" HorizontalOptions="Center" Margin="0"/>
+                                </StackLayout>
+
+                                <Image  Grid.RowSpan="2" Grid.Column="0" HeightRequest="100" Source="{Binding Image}"/>
+
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        
+
+        <Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="6">
+            <Label Grid.Row="0" Text="Выбор упражнений" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold"/>
+            <CollectionView Grid.Row="1" x:Name="exercisesCollection"
+                            ItemsSource="{Binding ChooseExercises}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding SelectExerciseCommand}"
+                            SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame Padding="5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:NewWorkoutViewModel}}, Path=SelectExerciseCommand}" CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="5*,*">
+                                    <Label Grid.Column="0" Text="{Binding Name}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Image Grid.Column="1" Source="{Binding Image}"/>
+                                </Grid>
+                            </Frame>
+                            
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        
+        
+        <ImageButton
+            Grid.Row="2"
+            HeightRequest="70"
+            WidthRequest="70"
+            Source="flag.png" 
+            Style="{StaticResource MyImageButtonStyle}"
+            HorizontalOptions="Start"
+            Command="{Binding FinishCommand}"/>
+
+    </Grid>
+
+    <!--
+                BackgroundColor="#a81423"
+
+                BackgroundColor="#d6b40b"
+     -->
+                    
+</ContentPage>
+

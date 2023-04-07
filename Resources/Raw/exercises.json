@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Жим гантелей лежа",
+    "id": 0,
+    "image": "jim_leja.png",
+    "sets": [
+      {
+        "reps": 8,
+        "weight": 22
+      }
+    ]
+  },
+  {
+    "name": "Подьем гантелей на бицепс",
+    "id": 1,
+    "image": "biceps.png",
+    "sets": [
+      {
+        "reps": 8,
+        "weight": 15
+      }
+    ]
+  },
+  {
+    "name": "Подьем гантелей над головой",
+    "id": 2,
+    "image": "podjom_stoya.png",
+    "sets": [
+      {
+        "reps": 8,
+        "weight": 14
+      }
+    ]
+  },
+  {
+    "name": "Приседания с гантелями",
+    "id": 3,
+    "image": "prisedanija.png",
+    "sets": [
+      {
+        "reps": 8,
+        "weight": 22
+      }
+    ]
+  },
+  {
+    "name": "Подтягивния на перекладине",
+    "id": 4,
+    "image": "podtyagivanija.png",
+    "sets": [
+      {
+        "reps": 8,
+        "weight": 69
+      }
+    ]
+  }
+]

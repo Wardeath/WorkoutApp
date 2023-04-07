@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkoutApp.Views.ExercisePage"
+             xmlns:viewModels="clr-namespace:WorkoutApp.ViewModels"
+             x:Name="MyExercisePage"
+             xmlns:models="clr-namespace:WorkoutApp.Models"
+             Title="{Binding Source={x:Reference MyExercisePage}, Path=BindingContext.MyExercise.Name}"
+             
+             BackgroundColor="DeepSkyBlue">
+
+    <Grid RowDefinitions="Auto,Auto,*" Margin="10" RowSpacing="5">
+
+        <CollectionView 
+                    Grid.Row="0"
+                    x:Name="setsCollection"
+                    ItemsSource="{Binding MyExercise.Sets}"
+                    >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HeightRequest="90" Margin="0" Padding="8" >
+                        <Grid ColumnDefinitions="8,*,*,40" ColumnSpacing="10" >
+                            <Label x:Name="DoThis" Grid.Column="0" Text="{Binding Id}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Frame  Grid.Column="1" Padding="4" >
+                                <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*,*" >
+
+                                    <Label Grid.Column="0" Grid.Row="0" Text="Вес" Grid.ColumnSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <ImageButton Grid.Column="0" Grid.Row="1"
+                                            
+                                    HeightRequest="30"
+                                    Source="minus.png" 
+                                    Style="{StaticResource MyImageButtonStyle}"
+                                    Command="{Binding BindingContext.ReduceWeightCommand, Source={x:Reference Name=MyExercisePage}}"
+                                    CommandParameter="{Binding .}"     />
+
+                                    <Label Grid.Column="1"  Grid.Row="1" Text="{Binding Weight}" FontSize="19" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
+                                    <ImageButton Grid.Column="2" Grid.Row="1"
+                                            
+                                    HeightRequest="30"
+                                    Source="plus.png" 
+                                    Style="{StaticResource MyImageButtonStyle}"
+                                    Command="{Binding BindingContext.AddWeightCommand,Source={x:Reference Name=MyExercisePage}}"
+                                    CommandParameter="{Binding .}"     />
+                                    <Label Grid.Row="2" Grid.ColumnSpan="3" Text="кг" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
+                                </Grid>
+                            </Frame>
+
+                            <Frame Grid.Column="2" Padding="4">
+                                <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*,*">
+
+                                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Повторений" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <ImageButton Grid.Row="1" Grid.Column="0" 
+                                            
+                                    HeightRequest="30"
+                                    Source="minus.png" 
+                                    Style="{StaticResource MyImageButtonStyle}"
+                                    Command="{Binding BindingContext.ReduceRepCommand,Source={x:Reference Name=MyExercisePage}}"
+                                    CommandParameter="{Binding .}"/>
+
+                                    <Label Grid.Row="1" Grid.Column="1"  Text="{Binding Reps, StringFormat='{0}'}" FontSize="19" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                                    <ImageButton Grid.Row="1" Grid.Column="2" 
+                                            
+                                    HeightRequest="30"
+                                    Source="plus.png" 
+                                    Style="{StaticResource MyImageButtonStyle}"
+                                    Command="{Binding BindingContext.AddRepCommand,Source={x:Reference Name=MyExercisePage}}"
+                                    CommandParameter="{Binding .}"/>
+
+                                    <Label Grid.Row="2" Grid.ColumnSpan="3" Text="раз" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+
+                                </Grid>
+
+                            </Frame>
+
+
+                            <ImageButton Grid.Row="0" Grid.Column="3"
+                                            
+                                    HeightRequest="35"
+                                    Source="delete2.png" 
+                                    Style="{StaticResource MyImageButtonStyle}"
+                                    Command="{Binding BindingContext.DeleteSetCommand, Source={x:Reference  Name = MyExercisePage} }" 
+                                    CommandParameter="{Binding .}"
+                                        />
+                            <!--"{Binding BindingContext.DeleteSetCommand, Source={x:Reference  Name = MyExercisePage} }" 
+                        "{Binding Source={RelativeSource AncestorType={x:Type viewModels:ExerciseViewModel}}, Path=DeleteSetCommand}"
+                    -->
+
+                        </Grid>
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ImageButton
+            Grid.Row="1"
+            HeightRequest="50"
+            IsVisible="{Binding Source={x:Reference MyExercisePage}, Path=BindingContext.IsAddButtonVisible}"
+            Source="add.png" 
+            Style="{StaticResource MyImageButtonStyle}"
+            Command="{Binding AddSetCommand}"/>
+        
+        
+
+        <!--
+        <Image  HeightRequest="300" Source="{Binding Source={x:Reference MyExercisePage}, Path=BindingContext.MyExercise.Image}"/>
+        -->
+
+        <Grid Grid.Row="2" Grid.RowDefinitions="*,50">
+            <Image  Grid.Row="0" Grid.Column="0" Margin="0,0,0,10" VerticalOptions="End"  Source="{Binding Source={x:Reference MyExercisePage}, Path=BindingContext.MyExercise.Image}"/>
+
+            <Button
+            Grid.Row="1"
+            Text="Сохранить" 
+            HeightRequest="50"
+            VerticalOptions="EndAndExpand"
+            Command="{Binding SaveExerciseCommand}"/>
+        </Grid>
+       
+
+        
+         
+        
+
+        
+
+
+    </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--        <Entry Placeholder="Количество повторений" x:Name="RepetitionsEntry" Margin="0,10,0,0" />
+                <Entry Placeholder="Количество подходов" x:Name="SetsEntry" Margin="0,10,0,0" />
+                <Entry Placeholder="Вес" x:Name="WeightEntry" Margin="0,10,0,0" />-->
+</ContentPage>
